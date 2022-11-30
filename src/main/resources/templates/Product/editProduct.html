@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Editar Producto</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2>Editar Producto </h2>
+        <form th:object="${product}" th:action="@{/products/edit/} + ${product.id}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="id">Código del Producto</label>
+                <input readonly th:field="*{id}" id="id"
+                       type="text"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''">
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre del Producto</label>
+                <input autocomplete="off" autofocus th:field="*{name}" id="name"
+                       placeholder="Escribe el nombre del Producto" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{name}"></div>
+            </div>
+            <div>
+                <label for="name">Línea</label>
+                <select th:field="*{foodLine}" class="form-select" aria-label="Default select example">
+                    <option th:each="foodline: ${foodlines}"
+                            th:value="${foodline.id}"
+                            th:text="${foodline.name}"/>
+                </select>
+            </div>
+            <br>
+            <div class="mb-3">
+                <label for="content" class="form-label">Contenido</label>
+                <textarea autocomplete="off" autofocus type="text" id="content"
+                          name="content" placeholder="Escribe el contenido del producto"
+                          th:field="${product.content}"
+                          th:value="*{content}" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="archivo" class="form-label">Imagen: </label>
+                <input th:value="${product.image}" th:field="${product.image}" type="file" class="form-control" id="archivo" name="archivo">
+            </div>
+
+            <div class="col-md-12">
+                <input type="hidden" class="form-control" id="image" th:field="*{image}" name="image">
+            </div>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            &nbsp;<a class="btn btn-danger" th:href="@{/products/show}">Cancelar</a>
+             <a class="btn btn-primary" th:href="@{/products/addprices/} + ${product.id}">Agregar Precios<i
+                     class="fa fa-edit"></i></a>
+        </form>
+        <div>
+            <img th:src="@{../src/main/resources/images/1.jpg}">
+        </div>
+    </div>
+</main>
+</body>
+</html>

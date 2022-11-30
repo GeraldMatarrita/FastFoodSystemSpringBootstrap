@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Mantenimiento</title>
+    <!--<link th:href="@{/css/bootstrap.css}" rel= "stylesheet" href="../static/css/bootstrap.css"> -->
+    <!-- <script th:src="@{/js/jquery.js}" src="../static/js/jquery.js"></script> -->
+    <!-- <script th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link active" th:href="@{/foodlines/showMaintenance}" aria-current="page" href="#">Líneas de comida</a>
+                <a class="nav-link active" th:href="@{/pricetypes/showMaintenance}" aria-current="page" href="#">Tipos de Precio</a>
+                <a class="nav-link active" th:href="@{/discounttickets/showMaintenance}" aria-current="page" href="#">Tiquetes de Descuento</a>
+                <a class="nav-link active" th:href="@{/products/showMaintenance}" aria-current="page" href="#">Tiquetes de Descuento</a>
+                <a class="nav-link active text-end" th:href="@{/users/login}" aria-current="page">Cerrar Sesión</a>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main layout:fragment="content">
+    <div class="jumbotron">
+        <h1>Usuario de Mantenimiento</h1>
+        </h3>¡Los desechos no van aquí!</h3>
+    </div>
+</main>
+
+<div>
+    <img src= "https://th.bing.com/th/id/R.5a9b9e4c8d7fbc21340b0eef6f2d3a73?rik=WSPrCWkwgcNLkA&riu=http%3a%2f%2fnebula.wsimg.com%2f345c75db6f9e930e586ed3b9e118f9c8%3fAccessKeyId%3dE2E6F558B980093F094B%26disposition%3d0%26alloworigin%3d1&ehk=Jh%2f0Wk1nuYwGtbX3qTnEhXMuQGcPvkwWjSdZd1PDJGw%3d&risl=&pid=ImgRaw&r=0" alt="search engine image" width="300" height="300" >
+</div>
+
+
+</body>
+</html>

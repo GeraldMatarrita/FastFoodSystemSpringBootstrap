@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title >Editar Tiquete de Descuento</title>
+    <!--<link th:href="@{/css/bootstrap.css}" rel= "stylesheet" href="../static/css/bootstrap.css"> -->
+    <!-- <script th:src="@{/js/jquery.js}" src="../static/js/jquery.js"></script> -->
+    <!-- <script th:src="@{/js/bootstrap.js}" src="../static/js/bootstrap.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+
+        <h2>Editar Tiquete </h2>
+        <form th:object="${discountticket}" th:action="@{/discounttickets/administrator/edit/} + ${discountticket.id}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="id">Código del Tiquete</label>
+                <input readonly th:field="*{id}" id="id"
+                          type="text"
+                          class="form-control"
+                          th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''">
+            </div>
+            <div class="form-group">
+                <label for="name">Descripción del Tiquete</label>
+                <input autocomplete="off" autofocus th:field="*{name}" id="name"
+                       placeholder="Escribe la descripción de la tarjeta" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{name}"></div>
+            </div>
+            <div class="form-group">
+                <label for="stock">Disponibles</label>
+                <input autocomplete="off" autofocus th:field="*{stock}" id="stock"
+                       placeholder="Escribe la cantidad disponibles" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('stock')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{stock}"></div>
+            </div>
+            <div class="form-group">
+                <label for="percent">Porcentaje de Descuento</label>
+                <input autocomplete="off" autofocus th:field="*{percent}" id="percent"
+                       placeholder="Escribe el porcentaje de descuento" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('percent')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{percent}"></div>
+            </div>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-danger" th:href="@{/discounttickets/showAdministrator}">Cancelar</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

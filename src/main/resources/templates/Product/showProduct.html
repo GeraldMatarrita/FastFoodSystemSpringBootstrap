@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Mostrar Productos</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2>Lista de Productos</h2>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             th:text="${mensaje}"
+             class="alert">
+        </div>
+        <a class="btn btn-success mb-2" th:href="@{/products/create}">Agregar</a>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.id}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/products/edit/} + ${product.id}">Editar <i
+                                class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form th:action="@{/products/delete}" method="post">
+                            <input type="hidden" name="id" th:value="${product.id}"/>
+                            <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/products/addprices/} + ${product.id}" method="get">
+                            <input type="hidden" name="id" th:value="${product.id}"/>
+                            <button type="submit" class="btn btn-primary">Agregar Precios<i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

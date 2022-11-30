@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Editar Tiquete</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+
+        <h2>Editar Tiquete </h2>
+        <form th:object="${discountticket}" th:action="@{/discounttickets/edit/} + ${discountticket.id}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="id">Código del Tiquete</label>
+                <input readonly th:field="*{id}" id="id"
+                          type="text"
+                          class="form-control"
+                          th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''">
+            </div>
+            <div class="form-group">
+                <label for="name">Descripción del Tiquete</label>
+                <input autocomplete="off" autofocus th:field="*{name}" id="name"
+                       placeholder="Escribe la descripción de la tarjeta" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{name}"></div>
+            </div>
+            <div class="form-group">
+                <label for="stock">Disponibles</label>
+                <input autocomplete="off" autofocus th:field="*{stock}" id="stock"
+                       placeholder="Escribe la cantidad disponibles" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('stock')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{stock}"></div>
+            </div>
+            <div class="form-group">
+                <label for="percent">Porcentaje de Descuento</label>
+                <input autocomplete="off" autofocus th:field="*{percent}" id="percent"
+                       placeholder="Escribe el porcentaje de descuento" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('percent')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{percent}"></div>
+            </div>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            &nbsp;<a class="btn btn-danger" th:href="@{/discounttickets/show}">Cancelar</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

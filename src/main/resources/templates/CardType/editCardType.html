@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Editar Tipo Tarjeta</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2>Editar Tipo de Tarjeta </h2>
+        <form th:object="${cardtype}" th:action="@{/cardtypes/edit/} + ${cardtype.id}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <div class="form-group">
+                <label for="id">Código del Tipo de Tarjeta</label>
+                <input readonly th:field="*{id}" id="id"
+                       type="text"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''">
+            </div>
+            <div class="form-group">
+                <label for="name">Nombre del Tipo de Tarjeta</label>
+                <input autocomplete="off" autofocus th:field="*{name}" id="name"
+                       placeholder="Escribe el nombre del tipo de tarjeta" type="text"
+                       class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                <div class="invalid-feedback" th:errors="*{name}"></div>
+            </div>
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <a class="btn btn-danger" th:href="@{/cardtypes/show}">Cancelar</a>
+        </form>
+    </div>
+</main>
+</body>
+</html>

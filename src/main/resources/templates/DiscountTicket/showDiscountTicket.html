@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Mostrar Tiquetes</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2>Lista de Tiquetes de Descuento</h2>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             th:text="${mensaje}"
+             class="alert">
+        </div>
+        <a class="btn btn-success mb-2" th:href="@{/discounttickets/create}">Agregar</a>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Disponibles</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="discountticket : ${discounttickets}">
+                    <td th:text="${discountticket.id}"></td>
+                    <td th:text="${discountticket.name}"></td>
+                    <td th:text="${discountticket.stock}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/discounttickets/edit/} + ${discountticket.id}">Editar <i
+                                class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form th:action="@{/discounttickets/delete}" method="post">
+                            <input type="hidden" name="id" th:value="${discountticket.id}"/>
+                            <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

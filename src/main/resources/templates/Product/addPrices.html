@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="master">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Lista de Precios</title>
+</head>
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2 th>Lista de Precios</h2>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             th:text="${mensaje}"
+             class="alert">
+        </div>
+        <form th:object="${product}">
+            <input type="hidden" th:field="*{name}">
+            <div class="form-group">
+                <label for="name">Nombre del Producto</label>
+                <input readonly th:field="*{name}" id="name"
+                       type="text"
+                       class="form-control"
+                       th:classappend="${#fields.hasErrors('id')} ? 'is-invalid' : ''">
+            </div>
+        </form>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Tipo Precio</th>
+                    <th>Precio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="productprice : ${prices}">
+                    <td th:text="${productprice.priceType.getName()}"></td>
+                    <td th:text="${productprice.price}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/products/editprices/} + ${productprice.product.id}">Editar
+                            <i
+                                    class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form th:object="${dataStorage}" th:action="@{/products/deleteprice/} + ${product.id}"
+                              method="post">
+                            <di>
+                            <input class="form-control" type="hidden" name="priceTypeID"
+                                   id="priceTypeID" th:value="${productprice.priceType.id}"/>
+                            <input class="form-control" type="hidden" name="productID" id="productID"
+                                   th:value="${productprice.product.id}"/>
+                            </di>
+                            <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary" th:href="@{/products/show}">Volver a productos</a>
+        </div>
+    </div>
+</main>
+</body>
+</html>

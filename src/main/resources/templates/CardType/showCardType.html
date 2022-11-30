@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">Mostrar Tipos Tarjeta</title>
+</head>
+
+<body>
+<main layout:fragment="content">
+    <div class="col-12">
+        <h2>Lista de Tipos de Tarjeta</h2>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             th:text="${mensaje}"
+             class="alert">
+        </div>
+        <a class="btn btn-success mb-2" th:href="@{/cardtypes/create}">Agregar</a>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cardtype : ${cardtypes}">
+                    <td th:text="${cardtype.id}"></td>
+                    <td th:text="${cardtype.name}"></td>
+                    <td>
+                        <a class="btn btn-warning" th:href="@{/cardtypes/edit/} + ${cardtype.id}">Editar <i
+                                class="fa fa-edit"></i></a>
+                    </td>
+                    <td>
+                        <form th:action="@{/cardtypes/delete}" method="post">
+                            <input type="hidden" name="id" th:value="${cardtype.id}"/>
+                            <button type="submit" class="btn btn-danger">Eliminar <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>
